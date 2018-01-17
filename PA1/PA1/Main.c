@@ -24,5 +24,3 @@ int main(void) {
 
 	fclose(outfile);
 }
-
-//todo: fix consecutivePoorSleep; COMMENT EVERYTHING YOU BITCH
