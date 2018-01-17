@@ -10,10 +10,6 @@
 #include <stdlib.h>
 #include <string.h> 
 
-//Credit to filip-roséen-refp on Stack Overflow
-char *strtok_single(char * str, char const * delims);
-
-
 //Credit to Andrew O'Fallon for code
 typedef enum sleep {
 	NONE = 0, ASLEEP = 1, AWAKE = 2, REALLYAWAKE = 3
@@ -31,4 +27,24 @@ typedef struct fitbit {
 } FitbitData;
 
 
+//Credit to filip-roséen-refp on Stack Overflow
+char *strtok_single(char * str, char const * delims);
 
+//Personal Code:
+FitbitData * getData(FILE *infile, FitbitData data[]);
+
+void writeData(FILE *outfile, FitbitData data[]);
+
+double caloriesBurned(FitbitData data[]);
+
+double distanceWalked(FitbitData data[]);
+
+double averageHeartrate(FitbitData data[]);
+
+int floorsWalked(FitbitData data[]);
+
+int stepsTaken(FitbitData data[]);
+
+int maximumSteps(FitbitData data[]);
+
+int * consecutivePoorSleep(FitbitData data[], int indicies[]);

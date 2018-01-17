@@ -1,9 +1,11 @@
 ﻿  Main.c
-c:\users\benjamin poile\documents\visual studio 2015\projects\pa1\pa1\main.c(21): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\benjamin poile\documents\visual studio 2015\projects\pa1\pa1\main.c(20): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
-c:\users\benjamin poile\documents\visual studio 2015\projects\pa1\pa1\main.c(39): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Functions.c
+c:\users\benjamin poile\documents\visual studio 2015\projects\pa1\pa1\functions.c(60): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
-c:\users\benjamin poile\documents\visual studio 2015\projects\pa1\pa1\main.c(77): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 7 has type 'int'
-c:\users\benjamin poile\documents\visual studio 2015\projects\pa1\pa1\main.c(26): warning C4101: 'sleep_level': unreferenced local variable
+c:\users\benjamin poile\documents\visual studio 2015\projects\pa1\pa1\functions.c(47): warning C4101: 'sleep_level': unreferenced local variable
+c:\users\benjamin poile\documents\visual studio 2015\projects\pa1\pa1\functions.c(150): warning C4018: '<=': signed/unsigned mismatch
+  Generating Code...
   PA1.vcxproj -> C:\Users\Benjamin Poile\Documents\Visual Studio 2015\Projects\PA1\Debug\PA1.exe
   PA1.vcxproj -> C:\Users\Benjamin Poile\Documents\Visual Studio 2015\Projects\PA1\Debug\PA1.pdb (Full PDB)
