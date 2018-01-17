@@ -1,0 +1,21 @@
+﻿  Main.c
+c:\users\poile\documents\visual studio 2015\projects\pa1\pa1\main.c(44): warning C4047: '==': 'int' differs in levels of indirection from 'void *'
+c:\users\poile\documents\visual studio 2015\projects\pa1\pa1\main.c(22): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+c:\users\poile\documents\visual studio 2015\projects\pa1\pa1\main.c(33): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(453): note: see declaration of 'strtok'
+c:\users\poile\documents\visual studio 2015\projects\pa1\pa1\main.c(35): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(453): note: see declaration of 'strtok'
+c:\users\poile\documents\visual studio 2015\projects\pa1\pa1\main.c(38): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(453): note: see declaration of 'strtok'
+c:\users\poile\documents\visual studio 2015\projects\pa1\pa1\main.c(40): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(453): note: see declaration of 'strtok'
+c:\users\poile\documents\visual studio 2015\projects\pa1\pa1\main.c(43): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(453): note: see declaration of 'strtok'
+c:\users\poile\documents\visual studio 2015\projects\pa1\pa1\main.c(51): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(453): note: see declaration of 'strtok'
+c:\users\poile\documents\visual studio 2015\projects\pa1\pa1\main.c(53): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(453): note: see declaration of 'strtok'
+c:\users\poile\documents\visual studio 2015\projects\pa1\pa1\main.c(25): warning C4101: 'split_data': unreferenced local variable
+  PA1.vcxproj -> C:\Users\poile\Documents\Visual Studio 2015\Projects\PA1\Debug\PA1.exe
+  PA1.vcxproj -> C:\Users\poile\Documents\Visual Studio 2015\Projects\PA1\Debug\PA1.pdb (Full PDB)
