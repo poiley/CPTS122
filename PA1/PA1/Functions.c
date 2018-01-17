@@ -14,12 +14,12 @@ CSV: Minute, Calories, Distance (in miles), Floors, Heartrate, Steps, Sleep leve
 */
 
 /*
-Code Credits go to 'filip-roséen-refp' from StackOverflow. The purpose of this function is to act 
-just as strtok would, but it doesn't skip over double delimiters (for example ",,") but returns a 
+Code Credits go to 'filip-rosï¿½en-refp' from StackOverflow. The purpose of this function is to act
+just as strtok would, but it doesn't skip over double delimiters (for example ",,") but returns a
 null value when such an action occurs.
 https://stackoverflow.com/questions/8705844/need-to-know-when-no-data-appears-between-two-token-separators-using-strtok
 */
-char *strtok_single(char * str, char const * delims) { 
+char *strtok_single(char * str, char const * delims) {
 	static char  * src = NULL;
 	char  *  p, *ret = 0;
 
@@ -105,7 +105,7 @@ FitbitData * getData(FILE *infile, FitbitData data[]) {
 
 double caloriesBurned(FitbitData data[]) {
 	double caloriesBurned = 0.00;
-	
+
 	for (int i = 0; i < 1440; i++)
 		caloriesBurned += data[i].calories;
 
@@ -150,7 +150,7 @@ double averageHeartrate(FitbitData data[]) {
 
 int maximumSteps(FitbitData data[]) {
 	int maximum = data[0].steps;
-	
+
 	for (int i = 1; i < 1440; i++)
 		if (maximum <= data[i].steps)
 			maximum = data[i].steps;
@@ -166,11 +166,13 @@ int * consecutivePoorSleep(FitbitData data[], int indicies[]) {
 		if (data[i].sleepLevel > 1) {
 			startIndex = i;
 
-			for (int j = i; j < (1440); j++) {
+			for (int j = i; j < 1440; j++) {
 				if (data[j].sleepLevel > 1)
 					endIndex = j;
-				else
+				else {
+					printf("distance found between:\t%d, %d\n", startIndex, endIndex);
 					break;
+				}
 			}
 
 			int sum = 0;
@@ -186,7 +188,7 @@ int * consecutivePoorSleep(FitbitData data[], int indicies[]) {
 
 	indicies[0] = overallStartIndex;
 	indicies[1] = overallEndIndex;
-		
+
 	return indicies;
 }
 
