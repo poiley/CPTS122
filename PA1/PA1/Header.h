@@ -10,6 +10,15 @@
 #include <stdlib.h>
 #include <string.h> 
 
+//Credit to filip-roséen-refp on Stack Overflow
+char *strtok_single(char * str, char const * delims);
+
+
+//Credit to Andrew O'Fallon for code
+typedef enum sleep {
+	NONE = 0, ASLEEP = 1, AWAKE = 2, REALLYAWAKE = 3
+} Sleep;
+
 //Credit to Andrew O'Fallon for code
 typedef struct fitbit {
 	char minute[9];
@@ -18,11 +27,8 @@ typedef struct fitbit {
 	unsigned int floors;
 	unsigned int heartRate;
 	unsigned int steps;
-//	Sleep sleepLevel;
+	Sleep sleepLevel;
 } FitbitData;
 
-//Credit to Andrew O'Fallon for code
-typedef enum sleep {
-	NONE = 0, ASLEEP = 1, AWAKE = 2, REALLYAWAKE = 3
-} Sleep;
+
 

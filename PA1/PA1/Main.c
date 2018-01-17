@@ -14,48 +14,67 @@ CSV: Minute, Calories, Distance (in miles), Floors, Heartrate, Steps, Sleep leve
 */
 
 int main(void) {
-	FitbitData data[1440] = { "0:00:00", 0.00, 0, 0, 0, 0, 0 };
-
+	FitbitData data[1440] = { "0:00:00", 0.00, 0.00, 0, 0, 0, NONE };
 	FILE *infile = NULL;
-	char line[1440] = "";
+	char line[256] = "";
 
 	infile = fopen("FitbitData.csv", "r");
 
 	if (infile != NULL) { 
-		char *split_data[7], *minute;
-		double calories;
-		int distance, floors, heart, steps, sleep_level;
-		//minute,	calories,		distance,	floors,	heart,	steps,	sleep_level
-		//string,	double,			int,		int,	int,	int,	int
-		//0:00:00,	0.968900025,	0,			0,		63,		0,		1
+		char *minute;
+		double calories, distance;
+		int floors, heartRate, steps, sleep_level, index = -1;
+		Sleep sleepLevel;
+		//title:	minute,		calories,		distance,	floors,	heartRate,	steps,	sleepLevel
+		//type:		string,		double,			double,		int,	int,		int,	Sleep
+		//example:	0:00:00,	0.968900025,	0,			0,		63,			0,		1
 
 		while (fgets(line, 1440, infile)) {
-			minute = strtok(line, ",");
-			printf("%s\t", minute);
-			calories = strtod(strtok(NULL, ","), NULL);
-			printf("%lf\t", calories);
-
-			distance = atoi(strtok(NULL, ","));
-			printf("%d\t", distance);
-			floors = atoi(strtok(NULL, ","));
-			printf("%d\t", floors);
-
-			//char *restoflines = strtok(NULL, "\n");
-			char *heartc = strtok(NULL, ",");
-			if (atoi(heartc) == NULL) {
-				heart = -1;
-			} else {
-				heart = atoi(heartc);
+			if (index == -1) { //skip the first line, the headers of the CSV file.
+				index++;
+				continue;
 			}
-			printf("%d\t", heart);
 
-			steps = atoi(strtok(NULL, ","));
-			printf("%d\t", steps);
-			sleep_level = atoi(strtok(NULL, ","));
-			printf("%d\n", sleep_level);
+			minute = strtok_single(line, ",");
+			strcpy(data[index].minute, minute);
 
-			//printf("min: %s\tcal: %lf\tdis: %d\tflr: %d\thrt: %d\tstp: %d\tslp: %d\t\n", minute,calories,distance,floors,heart,steps,sleep_level);
+			calories = strtod(strtok_single(NULL, ","), NULL);
+			data[index].calories = calories;
+
+			distance = strtod(strtok_single(NULL, ","), NULL);
+			data[index].distance = distance;
+
+			floors = atoi(strtok_single(NULL, ","));
+			data[index].floors = floors;
+
+			heartRate = atoi(strtok_single(NULL, ","));
+			data[index].heartRate = heartRate;
+
+			steps = atoi(strtok_single(NULL, ","));
+			data[index].steps = steps;
+
+			sleepLevel = atoi(strtok_single(NULL, ","));
+			switch (sleepLevel) {
+				case 1:
+					sleepLevel = ASLEEP;
+					break;
+				case 2: 
+					sleepLevel = AWAKE;
+					break;
+				case 3:
+					sleepLevel = REALLYAWAKE;
+				default: 
+					sleepLevel = NONE;
+					break;
+			}
+
+			data[index].sleepLevel = sleepLevel;
+
+			index++;
 		}
+		
+		for (int i = 0; i < 1440; i++)
+			printf("%s\t %lf\t %lf\t %d\t %d\t %d\t %d\n", data[i].minute, data[i].calories, data[i].distance, data[i].floors, data[i].heartRate, data[i].steps, data[i].sleepLevel);
 
 	}
 }
