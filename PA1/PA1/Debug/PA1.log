@@ -1,7 +1,8 @@
 ﻿  Functions.c
-c:\users\poile\documents\visual studio 2015\projects\pa1\pa1\functions.c(74): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\poile\documents\visual studio 2015\projects\pa1\pa1\functions.c(40): warning C4047: '!=': 'int' differs in levels of indirection from 'void *'
+c:\users\poile\documents\visual studio 2015\projects\pa1\pa1\functions.c(83): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
-c:\users\poile\documents\visual studio 2015\projects\pa1\pa1\functions.c(57): warning C4101: 'sleep_level': unreferenced local variable
-c:\users\poile\documents\visual studio 2015\projects\pa1\pa1\functions.c(189): warning C4018: '<=': signed/unsigned mismatch
+c:\users\poile\documents\visual studio 2015\projects\pa1\pa1\functions.c(66): warning C4101: 'sleep_level': unreferenced local variable
+c:\users\poile\documents\visual studio 2015\projects\pa1\pa1\functions.c(218): warning C4018: '<=': signed/unsigned mismatch
   PA1.vcxproj -> C:\Users\poile\documents\visual studio 2015\Projects\PA1\Debug\PA1.exe
   PA1.vcxproj -> C:\Users\poile\documents\visual studio 2015\Projects\PA1\Debug\PA1.pdb (Full PDB)

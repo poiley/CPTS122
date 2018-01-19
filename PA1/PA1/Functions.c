@@ -4,36 +4,45 @@
 * Programming Assignment : PA 1
 * Date : Jan 15th, 2018
 * Credits : Andrew O'Fallon for instructions and struct code
+*			StackOverflow user filip-roseen-refp for mystrtok()
 **********************************************************************/
 
 #include "Header.h"
 
 /*
- * AUTHOR: filip-roseen-refp
- * DESCRIPTION: Code Credits go to 'filip-ros�en-refp' from StackOverflow. The purpose of this function is to act
+ * ORIGINAL AUTHOR: @filip-roseen-refp on StackOverflow
+ * MAJOR MODIFICATIONS MADE BY: Benjamin Poile
+ * DESCRIPTION: Code Credits go to 'filip-roseen-refp' from StackOverflow. The purpose of this function is to act
  * just as strtok would, but it doesn't skip over double delimiters (for example ",,") but returns a
  * null value when such an action occurs.
  * URL: https://stackoverflow.com/questions/8705844
  */
-char *strtok_single(char * str, char const * delims) { //comment this method line by line to show understanding
-	static char  * src = NULL;
-	char  *  p, *ret = 0;
+char *mystrtok(char *toSplit) { //comment this method line by line to show understanding
+	static char *source = NULL; // static character means that it will stay the same between calls of `mystrtok`
+	char *splitSection, *toReturn = 0;
 
-	if (str != NULL)
-		src = str;
-	if (src == NULL)
+	if (toSplit != NULL) //If the input string isn't empty
+		source = toSplit; 
+
+	if (source == NULL) // If the string hasn't been totally delimited
 		return NULL;
 
-	if ((p = strpbrk(src, delims)) != NULL) {
-		*p = 0;
-		ret = src;
-		src = ++p;
-	} else if (*src) {
-		ret = src;
-		src = NULL;
+	/*
+	* strpbrk finds the first character in `source` that matches `,`
+	* It's worth noting that I have manually set the delimiter to be ",". This isn't very dynamic, but considering 
+	* that commas are CSV file standards, I figured it wasn't a problem.
+	*/										//WHAT'S HAPPENING: 
+	splitSection = strpbrk(source, ",");	//the entire line so far, minus the part we're trying to pull out the line (,0.1201384,0,0,68,0,1)
+	if ( splitSection != NULL ) {			//essentially checking if a `,` still exists in the string, which doesn't happen at the end of the line
+		*splitSection = 0;					//set to NULL
+		toReturn = source;					//at this point, toReturn is the section we're pulling out of the line
+		source = ++splitSection;			//removes toReturn (the part we're pulling out) from the line
+	} else if ( *source != NULL ) {			//if there's no more commas in the line, but the line is not NULL
+		toReturn = source;					//set what to return (literally everythign that's left)
+		source = NULL;						//wipe the static source
 	}
 
-	return ret;
+	return toReturn;				
 }
 
 /*
@@ -70,25 +79,25 @@ FitbitData * getData(FILE *infile, FitbitData data[]) {
 				continue;
 			}
 
-			minute = strtok_single(line, ",");
+			minute = mystrtok(line);
 			strcpy(data[index].minute, minute); //Write time ("00:00:00") to object
 
-			calories = strtod(strtok_single(NULL, ","), NULL); //convert string to double and store
+			calories = strtod(mystrtok(NULL), NULL); //convert string to double and store
 			data[index].calories = calories; //Write calories burned (0.00) to object
 
-			distance = strtod(strtok_single(NULL, ","), NULL); //convert string to double and store
+			distance = strtod(mystrtok(NULL), NULL); //convert string to double and store
 			data[index].distance = distance; //Write distance walked (0.00) to object
 
-			floors = atoi(strtok_single(NULL, ",")); //convert string to integer and store
+			floors = atoi(mystrtok(NULL)); //convert string to integer and store
 			data[index].floors = floors; //Write floors climed (0) to object
 
-			heartRate = atoi(strtok_single(NULL, ",")); //convert string to integer and store
+			heartRate = atoi(mystrtok(NULL)); //convert string to integer and store
 			data[index].heartRate = heartRate; //Write heart rate (0) to object
 
-			steps = atoi(strtok_single(NULL, ",")); //convert string to integer and store
+			steps = atoi(mystrtok(NULL)); //convert string to integer and store
 			data[index].steps = steps; //Write steps taken (0) to object
 
-			sleepLevel = atoi(strtok_single(NULL, ",")); //convert string to integer and store
+			sleepLevel = atoi(mystrtok(NULL)); //convert string to integer and store
 			switch (sleepLevel) { //convert integer to Sleep enum object
 				case 1: //if 1, ASLEEP
 					sleepLevel = ASLEEP;

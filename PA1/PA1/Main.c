@@ -1,9 +1,10 @@
 /*********************************************************************
 * Programmer: Benjamin Poile
-* Class: CptS 122, Spring 2018
-* Programming Assignment: PA 1
-* Date: Jan 15th, 2018
-* Credits: Andrew O'Fallon for instructions and struct code
+* Class : CptS 122, Spring 2018
+* Programming Assignment : PA 1
+* Date : Jan 15th, 2018
+* Credits : Andrew O'Fallon for instructions and struct code
+*			StackOverflow user filip-roseen-refp for mystrtok()
 **********************************************************************/
 
 #include "Header.h"
@@ -23,4 +24,6 @@ int main(void) {
 	writeData(outfile, data);
 
 	fclose(outfile);
+	
+	return 0;
 }

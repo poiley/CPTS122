@@ -1,9 +1,10 @@
 /*********************************************************************
 * Programmer: Benjamin Poile
-* Class: CptS 122, Spring 2018
-* Programming Assignment: PA 1
-* Date: Jan 15th, 2018
-* Credits: Andrew O'Fallon for instructions and struct code
+* Class : CptS 122, Spring 2018
+* Programming Assignment : PA 1
+* Date : Jan 15th, 2018
+* Credits : Andrew O'Fallon for instructions and struct code
+*			StackOverflow user filip-roseen-refp for mystrtok()
 **********************************************************************/
 
 #include <stdio.h>
@@ -31,8 +32,9 @@ typedef struct fitbit {
 } FitbitData;
 
 
-/*Credit to filip-roséen-refp on Stack Overflow (for documentation/explanation, see function)*/
-char *strtok_single(char * str, char const * delims);
+/* Credit to filip-roséen-refp on Stack Overflow (for documentation/explanation, see function)
+ * Major edits and configurations made by Benjamin Poile*/
+char *mystrtok(char * str);
 
 /******************
  * Personal Code: * 
