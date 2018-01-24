@@ -1,0 +1,7 @@
+﻿  main.c
+c:\users\poile\documents\visual studio 2015\projects\linkedlist3\linkedlist1\main.c(29): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'Node *'
+c:\users\poile\documents\visual studio 2015\projects\linkedlist3\linkedlist1\main.c(11): warning C4101: 'list': unreferenced local variable
+  LinkedList.c
+  Generating Code...
+  LinkedList1.vcxproj -> C:\Users\poile\Documents\Visual Studio 2015\Projects\LinkedList3\Debug\LinkedList1.exe
+  LinkedList1.vcxproj -> C:\Users\poile\Documents\Visual Studio 2015\Projects\LinkedList3\Debug\LinkedList1.pdb (Full PDB)

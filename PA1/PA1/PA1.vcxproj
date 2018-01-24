@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FitbitData.csv" />
+    <None Include="Results.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

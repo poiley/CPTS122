@@ -95,7 +95,7 @@ int maximumSteps(FitbitData data[]);
 
 /*
  * AUTHOR: Benjamin Poile
- * DESCRIPTION: Returns the sum of the sleepLevel data over the longest consecuitve
- * period of time where the data's sleepLevel is greater than 1 (Poor Sleep).
+ * DESCRIPTION: Returns the range of times in which the sleep was considered "poor".
+ * NOTE: I worked through this method with Glen Bennett. No code was explicitly shared but the logic may be similar.
  */
-int * consecutivePoorSleep(FitbitData data[], int indicies[]);
+char * consecutivePoorSleep(FitbitData data[], int indicies[]);

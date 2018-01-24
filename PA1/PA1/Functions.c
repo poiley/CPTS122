@@ -133,13 +133,13 @@ void writeData(FILE *outfile, FitbitData data[]) {
 	printf("Total Calories,Total Distance,Total Floors,Total Steps,Avg Heartrate,Max Steps,Sleep\n");
 
 	//obtain sleep data, ready for formatting as string for output.
-	int sleep[2] = { -1 };
+	char *sleep[2] = { "\0" };
 	consecutivePoorSleep(data, sleep);
 
 	/*Line 2: valueCalories,valueDistance,valueFloors,valueSteps,valueHeartrate,valueMax,valueSleepStart:valueSleepEnd*/
 	//Write line 2 to file, then to screen
-	fprintf(outfile, "%lf,%lf,%d,%d,%lf,%d,%d:%d", caloriesBurned(data), distanceWalked(data), floorsWalked(data), stepsTaken(data), averageHeartrate(data), maximumSteps(data), sleep[0], sleep[1]);
-	printf("%lf,%lf,%d,%d,%lf,%d,%d:%d\n", caloriesBurned(data), distanceWalked(data), floorsWalked(data), stepsTaken(data), averageHeartrate(data), maximumSteps(data), sleep[0], sleep[1]);
+	fprintf(outfile, "%lf,%lf,%d,%d,%lf,%d,%s:%s", caloriesBurned(data), distanceWalked(data), floorsWalked(data), stepsTaken(data), averageHeartrate(data), maximumSteps(data), sleep[0], sleep[1]);
+	printf("%lf,%lf,%d,%d,%lf,%d,%s:%s\n", caloriesBurned(data), distanceWalked(data), floorsWalked(data), stepsTaken(data), averageHeartrate(data), maximumSteps(data), sleep[0], sleep[1]);
 }
 
 /*
@@ -196,13 +196,14 @@ int stepsTaken(FitbitData data[]) {
 
 /* 
  * AUTHOR: Benjamin Poile
- * DESCRIPTION: Returns the average heart rate over the 24 hour period
+ * DESCRIPTION: Returns the average heart rate over the 24 hour period. If the heart rate is 0, it is not counted.
  */
 double averageHeartrate(FitbitData data[]) {
 	double average = 0;
 
 	for (int i = 0; i < 1440; i++)
-		average += data[i].heartRate;
+		if(data[i].heartRate != 0)
+			average += data[i].heartRate;
 
 	return average / 1440;
 }
@@ -223,10 +224,10 @@ int maximumSteps(FitbitData data[]) {
 
 /* 
  * AUTHOR: Benjamin Poile 
- * DESCRIPTION: Returns the sum of the sleepLevel data over the longest consecuitve 
- * period of time where the data's sleepLevel is greater than 1 (Poor Sleep).
+ * DESCRIPTION: Returns the range of times in which the sleep was considered "poor".
+ * NOTE: I worked through this method with Glen Bennett. No code was explicitly shared but the logic may be similar.
  */
-int * consecutivePoorSleep(FitbitData data[], int indicies[]) {
+char * consecutivePoorSleep(FitbitData data[], int indicies[]) {
 	int sumOfTime = 0, startIndex, endIndex, overallStartIndex, overallEndIndex; //Setup variables
 
 	//For the length of the entire database (1440 entries)
@@ -257,8 +258,8 @@ int * consecutivePoorSleep(FitbitData data[], int indicies[]) {
 	}
 
 	//Store the start and end index in integer array
-	indicies[0] = overallStartIndex;
-	indicies[1] = overallEndIndex;
+	indicies[0] = data[overallStartIndex].minute;
+	indicies[1] = data[overallEndIndex].minute;
 
 	//Return bounds as integer array.
 	return indicies;
