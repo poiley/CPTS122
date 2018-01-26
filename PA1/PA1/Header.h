@@ -34,7 +34,7 @@ typedef struct fitbit {
 
 /* Credit to filip-roséen-refp on Stack Overflow (for documentation/explanation, see function)
  * Major edits and configurations made by Benjamin Poile*/
-char *mystrtok(char * str);
+char *mystrtok(char * toSplit);
 
 /******************
  * Personal Code: * 

@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{0C6309C4-E2EF-4407-8112-2679AF82A569}</ProjectGuid>
+    <ProjectGuid>{3C097689-FDE9-447F-A7D9-E74FCDE68B17}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>PA2</RootNamespace>
+    <RootNamespace>Lab2</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -142,14 +142,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Functions.c" />
-    <ClCompile Include="Main.c" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Header.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="musicPlayList.csv" />
+    <ClCompile Include="Functions.c" />
+    <ClCompile Include="Main.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
