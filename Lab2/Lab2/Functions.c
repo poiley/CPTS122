@@ -17,7 +17,7 @@ Boolean insertContactInOrder(Node **pList, Contact newData) {
 	Node *pMem = makeNode(newData);
 
 	if (pMem == NULL)
-		return (Boolean)FALSE;
+		return FALSE;
 
 	pMem->pNext = *pList;
 	*pList = pMem;
@@ -71,7 +71,7 @@ Boolean editContact(Node *pList, Contact searchContact) {
 	return FALSE;
 }
 
-Boolean loadContacts(FILE *infile, Node **pList) {
+Boolean loadContacts(FILE *infile, Node **pList) { //not finished
 	int i = 0, num_contacts = 0;
 
 	if (i == num_contacts)

@@ -1,15 +1,2 @@
-﻿  Main.c
-c:\users\benjamin poile\documents\visual studio 2015\projects\lab2\lab2\main.c(8): warning C4101: 'pHead': unreferenced local variable
-c:\users\benjamin poile\documents\visual studio 2015\projects\lab2\lab2\main.c(10): warning C4101: 'pList': unreferenced local variable
-  Functions.c
-c:\users\benjamin poile\documents\visual studio 2015\projects\lab2\lab2\functions.c(55): warning C4477: 'scanf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'char **'
-c:\users\benjamin poile\documents\visual studio 2015\projects\lab2\lab2\functions.c(55): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1270): note: see declaration of 'scanf'
-c:\users\benjamin poile\documents\visual studio 2015\projects\lab2\lab2\functions.c(58): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
-c:\users\benjamin poile\documents\visual studio 2015\projects\lab2\lab2\functions.c(67): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
-  Generating Code...
-c:\users\benjamin poile\documents\visual studio 2015\projects\lab2\lab2\functions.c(84): warning C4716: 'storeContacts': must return a value
-  Lab2.vcxproj -> C:\Users\Benjamin Poile\Documents\Visual Studio 2015\Projects\Lab2\Debug\Lab2.exe
-  Lab2.vcxproj -> C:\Users\Benjamin Poile\Documents\Visual Studio 2015\Projects\Lab2\Debug\Lab2.pdb (Full PDB)
+﻿  Lab2.vcxproj -> C:\Users\poile\documents\visual studio 2015\Projects\Lab2\Debug\Lab2.exe
+  Lab2.vcxproj -> C:\Users\poile\documents\visual studio 2015\Projects\Lab2\Debug\Lab2.pdb (Full PDB)

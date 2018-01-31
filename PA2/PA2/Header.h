@@ -8,8 +8,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h> 
-
+#include <string.h>
 
 //NOTE: I used code I wrote in lab with my group. Similarities in my Linked List code may be seen because of that.
 typedef enum boolean {
@@ -40,7 +39,10 @@ typedef struct node {
 int displayMenu();
 Node * makeNode(Record newData);
 Boolean insertFront(Node **pList, Record newData);
-Boolean deleteContact(Node **pList, Record search);
-Boolean rate(Node *pList, char *query);
+Record *deleteRecord(Node **pList, Record search);
+Boolean rate(Node **pList, char *query);
 void printList(Node *pList);
-void printList(Node *pList, Record search);
+void printListQuery(Node *pList, char *query);
+void load(Node **pList);
+void store(Node *pList);
+void play(Node *pList);

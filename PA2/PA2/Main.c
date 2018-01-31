@@ -12,11 +12,12 @@
 //	TA requests that dev reads and writes from the same .csv file.
 
 int main() {
+	Node *pList = NULL;
 	int option = -1;
 
 	while( option != 11 )
 		option = displayMenu();
 
-	printf("Quitting!");
+	printf("Quitting!\n");
 	return 0;
 }
