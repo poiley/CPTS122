@@ -3,40 +3,43 @@
 * Class : CptS 122, Spring 2018
 * Programming Assignment : PA 2
 * Date : Jan 24th, 2018
-* Credits : Andrew O'Fallon for instructions and struct code
+* Credits : Andrew O'Fallon for instructions, guidance, printList() 
+*			and struct code.
 **********************************************************************/
 
 #include "Header.h"
 
-
-int displayMenu() {
-	Node *pList = (Node *) malloc(sizeof(Node));
-	pList = NULL;
-	int menu = -1, submenu = -1;
+/*
+ * AUTHOR: Benjamin Poile
+ * DESCRIPTION: Goes through the motions of prompting the user for a menu 
+ * selection and running the functions based on the user's choice. At the 
+ * end of the function, changes due to user's choices are written to the 
+ * Linked List that's passed as in as a parameter through pointers.
+ */
+int displayMenu(Node **pList) {
+	Node *pMem = *pList;			// Create a temporary linked list that duplicates the data in the linked list that already exists.
+	int menu = -1, submenu = -1;	// Initiallize data.
 	char query[100] = "";
-	printf("\n(1)\tload\n(2)\tstore\n(3)\tdisplay\n(4)\tinsert\n(5)\tdelete\n(6)\tedit\n(7)\tsort\n(8)\trate\n(9)\tplay\n(10)\tshuffle\n(11)\texit");
+	printf(	"\n(1)\tload\n(2)\tstore\n(3)\tdisplay\n(4)"			// Display Main Menu prompt.
+			"\tinsert\n(5)\tdelete\n(6)\tedit\n(7)\tsort"
+			"\n(8)\trate\n(9)\tplay\n(10)\tshuffle\n(11)\texit"); 
 	
+	// Check if the user has input a valid selection and loop if they haven't.
 	while (!(menu >= 1 && menu <= 11)) {
 		printf("\n->\t");
 		scanf("%d", &menu);
 	}
 
-	printf("Success!\n");
+	printf("Success!\n"); // If the user has input a valid selection, return a success message.
 
 	switch (menu) {
-		case 1:
-			//load
-			load(&pList);
+		case 1:		// Load.
+			load(&pMem);
 			break;
-		case 2:
-			//store
-			load(&pList);
-			store(pList);
+		case 2:		// Store.
+			store(pMem);
 			break;
-		case 3:
-			//display
-			load(&pList);
-
+		case 3:		// Display.
 			printf("\n(1)\tLoad all\n(2)\tLoad by Artist\n");			
 			while (!(submenu == 1 || submenu == 2)) {
 				printf("\n->\t");
@@ -45,55 +48,53 @@ int displayMenu() {
 
 			switch (submenu) {
 				case 1:
-					printList(pList);
+					printList(pMem);
 					break;
 				case 2:
 					printf("Artist?\n->\t");
-					scanf("%s", &query);
-					printListQuery(pList, query);
+					scanf(" %[^\n]s", &query);
+					printListQuery(pMem, query);
 			}
 			break;
 
-		case 4:
-			//insert
+		case 4:		// Insert.
 			break;
-		case 5:
-			//delete
+		case 5:		// Delete. 
 			break;
-		case 6:
-			//edit
+		case 6:		// Edit.
 			break;
-		case 7:
-			//sort
+		case 7:		// Sort.
 			break;
-		case 8:
-			//rate
-			load(&pList);
+		case 8:		// Rate.
 			printf("\nSong?\n->\t");
-			scanf("%s", &query);
-			rate(&pList, query);
+			scanf(" %[^\n]s", &query);
+			rate(&pMem, query);
 			break;
-		case 9: 
-			//play
-			load(&pList);
-			play(pList);
+		case 9:		// Play.
+			play(pMem);
 			break;
-		case 10:
-			//shuffle
+		case 10:	// Shuffle.
 			break;
-		case 11:
-			//exit
+		case 11:	// Exit.
 			return 11;
 	}
+
+	*pList = pMem; // After running whatever command the user selected, write changes.
 }
 
+/*
+ * AUTHOR: Benjamin Poile
+ * DESCRIPTION: Read from the file `musicPlayList.csv` and parse the data into
+ * a LinkedList.
+ */
 void load(Node **pList) {
+	*pList = NULL;										// Initialize data and objects.
 	FILE *infile = fopen("musicPlayList.csv", "r");
 	Record r = { "", "", "", "",{ -1, -1 }, -1, -1 };
 	char line[256] = "";
 
-	if (infile != NULL) {
-		while (fgets(line, 256, infile) != NULL) {
+	if (infile != NULL) { // If the file exists and isn't empty.
+		while (fgets(line, 256, infile) != NULL) { // Read through `csv`, line-by-line.
 
 			r.artist = strtok(line, ",");						//Artist
 			
@@ -130,10 +131,15 @@ void load(Node **pList) {
 			insertFront(&*pList, r);
 		}
 	}
-
 	fclose(infile);
 }
 
+/*
+ * AUTHOR: Benjamin Poile
+ * DESCRIPTION: As specifified by TA, this function, when called, will write to 
+ * the same file as we read from. It writes all data from the LinkedList to the
+ * file `musicPlayList.csv`.
+ */
 void store(Node *pList) {
 	FILE *infile = fopen("musicPlayList.csv", "w+");
 	while (pList != NULL) {
@@ -162,6 +168,11 @@ void store(Node *pList) {
 	printf("Data written to file!\n");
 }
 
+/*
+ * AUTHOR: Benjamin Poile
+ * DESCRIPTION: For building Linked Lists. Creates a new node, allocates the 
+ * memory needed and then assigns the data to the object before returinging.
+ */
 Node * makeNode(Record newData) {
 	Node *pMem = NULL;
 
@@ -183,7 +194,7 @@ Node * makeNode(Record newData) {
 
 		pMem->data.genre	= malloc(strlen(newData.genre)	* sizeof(char *) + 1);
 		strcpy(pMem->data.genre, newData.genre);
-
+		
 		//NON-STRINGS TAKE LESS COMPLEX DATA ASSIGNMENTS 
 		pMem->data.length	= newData.length;
 		pMem->data.plays	= newData.plays;
@@ -193,10 +204,15 @@ Node * makeNode(Record newData) {
 	return pMem;
 }
 
+/*
+ * AUTHOR: Benjamin Poile
+ * DESCRIPTION: Adds a new Node with new data from a new record in the object 
+ * `newData` to the front of the LinkedList `pList`. Returns TRUE if successful.
+ */
 Boolean insertFront(Node **pList, Record newData) {
 	Node *pMem = makeNode(newData);
 
-	if (pMem == NULL) //if not memory not properly allocated
+	if (pMem == NULL || pMem->data.artist == NULL) //if not memory not properly allocated
 		return FALSE;
 
 	if (*pList != NULL) { //if the list is not empty
@@ -209,42 +225,34 @@ Boolean insertFront(Node **pList, Record newData) {
 	return TRUE;
 }
 
-Record *deleteRecord(Node **pList, Record search) {
-	Node *pCurrent = *pList;
-
-	if (strcmp(pCurrent->data.song, search.song) == 0) {
-		pCurrent->pNext = pCurrent->pNext->pNext;
-		free(pCurrent->pNext);
-		return TRUE;
-	}
-
-	while ((pCurrent->pNext != NULL) && (strcmp(pCurrent->pNext->data.song, search.song) != 0))
-		pCurrent = pCurrent->pNext;
-
-	if (pCurrent->pNext != NULL) {
-		pCurrent->pNext = pCurrent->pNext->pNext;
-		free(pCurrent->pNext);
-		return TRUE;
-	}
-
-	return FALSE;
-}
-
+/*
+ * AUTHOR: Benjamin Poile
+ * DESCRIPTION: After taking in a search term, the list is searched for a song 
+ * matching the title and then offers to re-rate the song.
+ */
 Boolean rate(Node **pList, char *query) {
-	while (*pList != NULL) {
-		if (strcmp((*pList)->data.song, query) == 0) {
-			(*pList)->data.rating = rate_query();
-			printf("New rating for song '%s': %d\n", (*pList)->data.song, (*pList)->data.rating);
+	Node *pMem = *pList;
 
-			return TRUE;
+	while (pMem != NULL) {
+		if (strcmp(pMem->data.song, query) == 0) {
+			pMem->data.rating = rate_query();
+			printf("New rating for song '%s': %d\n", pMem->data.song, pMem->data.rating);
+
+			break;
 		}
 
-		(*pList) = (*pList)->pNext;
+		pMem = pMem->pNext;
 	}
+
 	return FALSE;
 }
 
-// I wrote this because I'm lazy and I'm calling it twice in `rate()` so it seemed efficient
+/*
+ * AUTHOR: Benjamin Poile
+ * DESCRIPTION: Considering this prompt is done a few times throughout the program, 
+ * I figured I'd just write it it's own method for simplicity and efficiency. All 
+ * it does is prompt the user for a rating.
+ */
 int rate_query() { 
 	int newRating = -1;
 	
@@ -254,7 +262,10 @@ int rate_query() {
 	return newRating;
 }
 
-//Code credit: Andrew O'Fallon
+/*
+ * AUTHOR: Andrew O'Fallon
+ * DESCRIPTION: Recursively print the song and artist in the LinkedList.
+ */
 void printList(Node *pList) {
 	if (pList != NULL) {
 		printf("Song:\t%s\t\t\tby %s\n", pList->data.song, pList->data.artist);
@@ -262,11 +273,15 @@ void printList(Node *pList) {
 	}
 }
 
+/*
+ * AUTHOR: Benjamin Poile
+ * DESCRIPTION: List all the music by an artist, who's name is stored in the object `query`.
+ */
 void printListQuery(Node *pList, char *query) {
 	printf("Music by %s:\n", query);
 	
 	int i = 1;
-	while (pList->pNext != NULL) {
+	while (pList != NULL) {
 		if (strcmp(pList->data.artist, query) == 0) {
 			printf("(%d)\t\"%s\"\n", i, pList->data.song);
 			i++;
@@ -278,11 +293,17 @@ void printListQuery(Node *pList, char *query) {
 		printf("No music found by %s\n", query);
 }
 
-
+/*
+ * AUTHOR: Benjamin Poile
+ * DESCRIPTION: Prompt the user for a song to play from, skip to that song in the 
+ * LinkedList and 'play' every song from there on after. 'Playing' is essentially 
+ * printing it out in the ASCII MP3 player for a few seconds and clearing the 
+ * screen before skipping to the next song.
+ */
 void play(Node *pList) {
 	char song[15] = "";
 	printf("Song?\n->\t");
-	scanf("%s", &song);
+	scanf(" %[^\n]s", &song);
 	
 	while ( pList != NULL && strcmp(pList->data.song, song) != 0 )
 		pList = pList->pNext;

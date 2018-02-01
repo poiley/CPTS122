@@ -3,21 +3,20 @@
 * Class : CptS 122, Spring 2018
 * Programming Assignment : PA 2
 * Date : Jan 24th, 2018
-* Credits : Andrew O'Fallon for instructions and struct code
+* Credits : Andrew O'Fallon for instructions, guidance, printList()
+*			and struct code.
 **********************************************************************/
 
 #include "Header.h"
 
-//NOTE:
-//	TA requests that dev reads and writes from the same .csv file.
-
 int main() {
-	Node *pList = NULL;
-	int option = -1;
+	Node *pList = (Node *)malloc(sizeof(Node)); // Allocate the memory for the linked list.
+	int option = -1;							// Initialize the main menu selector.
 
-	while( option != 11 )
-		option = displayMenu();
+	while (option != 11)						// As long as the user hasn't input an 11 (meaing quit), loop.
+		option = displayMenu(&pList);			// Display the menu in `Functions.c` and edit the Linked List 
+												// according to the user's selected menu choice.
 
-	printf("Quitting!\n");
-	return 0;
+	printf("Quitting!\n");						// If the user has decided to quite, display the quit option.
+	return 0;									// Quit/return.
 }
