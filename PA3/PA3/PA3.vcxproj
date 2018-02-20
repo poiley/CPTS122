@@ -148,6 +148,7 @@
     <None Include="musicPlayList.csv" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Exam1.c" />
     <ClCompile Include="Functions.c" />
     <ClCompile Include="Main.c" />
   </ItemGroup>
