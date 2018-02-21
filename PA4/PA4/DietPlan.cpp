@@ -30,15 +30,15 @@ DietPlan::DietPlan(DietPlan &newPlan) {
 DietPlan::~DietPlan() {}
 
 /**GETTERS**/
-int DietPlan::getCalories() {
+int DietPlan::getCalories() const {
 	return calories;
 }
 
-string DietPlan::getName() {
+string DietPlan::getName() const {
 	return name;
 }
 
-string DietPlan::getDate() {
+string DietPlan::getDate() const {
 	return date;
 }
 
@@ -66,20 +66,25 @@ void DietPlan::editGoal() {
 	cout << "New goal: " << calories << endl;
 }
 
-/*ostream& operator << (ostream& out, DietPlan &plan) {
-	out << "==New goal==" << endl
-		<< "Name:\t" << &plan.getName() << endl
-		<< "Goal:\t" << plan.getCalories() << endl
-		<< "Date:\t" << &plan.getDate() << endl << endl;
-
-	ofstream outfile;
-	outfile.open("dietPlans.txt");
-
-	outfile << &plan.getName() << endl
-			<< plan.getCalories() << endl
-			<< &plan.getDate();
-	
-	outfile.close();
+/**NON MEMBER FUNCTIONS**/
+ostream& operator << (ostream &out, const DietPlan &plan) {
+	out << plan.getName() << endl
+		<< plan.getCalories() << endl
+		<< plan.getDate() << endl;
 
 	return out;
-}*/
+}
+
+istream& operator >> (istream &in, DietPlan &plan) {
+	char data[20];
+	in >> data;
+
+	if (plan.getName() == "")
+		plan.setName(data);
+	else if (plan.getCalories() == 0)
+		plan.setCalories(stoi(data));
+	else
+		plan.setDate(data);
+	
+	return in;
+}

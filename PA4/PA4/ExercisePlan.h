@@ -16,9 +16,9 @@ public:
 
 	~ExercisePlan();
 
-	int getSteps();
-	string getName();
-	string getDate();
+	int getSteps() const;
+	string getName() const;
+	string getDate() const;
 
 	void setSteps(int newSteps);
 	void setName(string newName);
@@ -29,3 +29,6 @@ private:
 	int steps;
 	string name, date;
 };
+
+ostream& operator << (ostream &out, const ExercisePlan &plan);
+istream& operator >> (istream &in, ExercisePlan &plan);

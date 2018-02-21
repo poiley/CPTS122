@@ -2,26 +2,27 @@ ExercisePlan1
 1000
 01/01/2018
 
-ExercisePlan2
-1200
+ExercisePlan1
+1000
 01/02/2018
 
-ExercisePlan3
-1500
+ExercisePlan1
+1000
 01/03/2018
 
-ExercisePlan4
-1700
+ExercisePlan1
+1000
 01/04/2018
 
-ExercisePlan5
-2000
+ExercisePlan1
+1000
 01/05/2018
 
-ExercisePlan6
-2500
+ExercisePlan1
+1000
 01/06/2018
 
-ExercisePlan7
-3000
+ExercisePlan1
+1000
 01/07/2018
+

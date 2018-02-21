@@ -69,43 +69,32 @@ void runApp() {
 }
 
 /*
-* AUTHOR: Benjamin Poile
-* DESCRIPTION: Must define two of these functions; one for a DietPlan and one for an
-* ExercisePlan.This function reads one record from the given stream. These will be
-* considered overloaded functions!Precondition: file is already open!
-*/
+ * AUTHOR: Benjamin Poile
+ * DESCRIPTION: Must define two of these functions; one for a DietPlan and one for an
+ * ExercisePlan. This function reads one record from the given stream. These will be
+ * considered overloaded functions! 
+ * PRECONDITION: file is already open!
+ */
 void loadDailyPlan(fstream &fileStream, DietPlan &plan) {
-	char var[20];
-	fileStream >> var;
-	plan.setName(var);
-
-	fileStream >> var;
-	plan.setCalories(stoi(var));
-
-	fileStream >> var;
-	plan.setDate(var);
+	fileStream >> plan;
+	fileStream >> plan;
+	fileStream >> plan;
 }
 
 void loadDailyPlan(fstream &fileStream, ExercisePlan &plan) {
-	char var[20];
-	fileStream >> var;
-	plan.setName(var);
-
-	fileStream >> var;
-	plan.setSteps(stoi(var));
-
-	fileStream >> var;
-	plan.setDate(var);
+	fileStream >> plan;
+	fileStream >> plan;
+	fileStream >> plan;
 }
 
 /*
-* AUTHOR: Benjamin Poile
-* DESCRIPTION: Must define two of these functions; one for a DietPlan and one for an
-* ExercisePlan. This function must read in all seven daily plans from the given
-* stream. Note: the array parameter would change if using a vector or linked list!
-* This function should call loadDailyPlan(); directly.
-* PRECONDITION: file is already open!
-*/
+ * AUTHOR: Benjamin Poile
+ * DESCRIPTION: Must define two of these functions; one for a DietPlan and one for an
+ * ExercisePlan. This function must read in all seven daily plans from the given
+ * stream. Note: the array parameter would change if using a vector or linked list!
+ * This function should call loadDailyPlan(); directly.
+ * PRECONDITION: file is already open!
+ */
 void loadWeeklyPlan(fstream &fileStream, DietPlan *weeklyPlan[]) {
 	DietPlan diet_temp;
 	for (int i = 0; i < 7; i++) {
@@ -123,29 +112,25 @@ void loadWeeklyPlan(fstream &fileStream, ExercisePlan *weeklyPlan[]) {
 }
 
 /*
-* AUTHOR: Benjamin Poile
-* DESCRIPTION: Writes a daily plan to the screen. You must apply the overloaded stream
-* insertion operator here! Note: you must determine the appropriate parameters and
-* return type. Once again you must define two of these!
-*/
+ * AUTHOR: Benjamin Poile
+ * DESCRIPTION: Writes a daily plan to the screen. You must apply the overloaded stream
+ * insertion operator here! Note: you must determine the appropriate parameters and
+ * return type. Once again you must define two of these!
+ */
 void displayDailyPlan(DietPlan plan) {
-	cout << "Name:\t\t" << plan.getName() << endl
-		 << "Date:\t\t" << plan.getDate() << endl
-		 << "Calories:\t" << plan.getCalories() << endl << endl;
+	cout << plan << endl;
 }
 
 void displayDailyPlan(ExercisePlan plan) {
-	cout << "Name:\t\t" << plan.getName() << endl
-		 << "Date:\t\t" << plan.getDate() << endl
-		 << "Steps:\t\t" << plan.getSteps() << endl << endl;
+	cout << plan << endl;
 }
 
 /*
-* AUTHOR: Benjamin Poile
-* DESCRIPTION: Writes a weekly plan to the screen. This function must call
-* displayDailyPlan();. Note: you must determine the appropriate parameters and return
-* type.Once again you must define two of these!
-*/
+ * AUTHOR: Benjamin Poile
+ * DESCRIPTION: Writes a weekly plan to the screen. This function must call
+ * displayDailyPlan();. Note: you must determine the appropriate parameters and return
+ * type. Once again you must define two of these!
+ */
 void displayWeeklyPlan(DietPlan weeklyPlan[]) {
 	for (int i = 0; i < 7; i++)
 		displayDailyPlan(weeklyPlan[i]);
@@ -157,50 +142,50 @@ void displayWeeklyPlan(ExercisePlan weeklyPlan[]) {
 }
 
 /*
-* AUTHOR: Benjamin Poile
-* DESCRIPTION: writes a daily plan to a file. You must apply the overloaded stream
-* insertion operator here! Note: you must determine the appropriate parameters and
-* return type. Once again you must define two of these!
-*/
+ * AUTHOR: Benjamin Poile
+ * DESCRIPTION: writes a daily plan to a file. You must apply the overloaded stream
+ * insertion operator here! Note: you must determine the appropriate parameters and
+ * return type. Once again you must define two of these!
+ */
 void storeDailyPlan(fstream &fileStream, DietPlan plan) {
-	fileStream << plan.getName() << endl
-			   << plan.getCalories() << endl
-			   << plan.getDate() << endl << endl;
+	fileStream << plan << endl;
 }
 
 void storeDailyPlan(fstream &fileStream, ExercisePlan plan) {
-	fileStream << plan.getName() << endl
-			   << plan.getSteps() << endl
-			   << plan.getDate() << endl << endl;
+	fileStream << plan << endl;
 }
 
 /*
-* AUTHOR: Benjamin Poile
-* DESCRIPTION: writes a weekly plan to a file. This function must call
-* storeDailyPlan();.You must apply the overloaded stream insertion operator here!
-* Note: you must determine the appropriate parameters and return type. Once again you
-* must define two of these!
-*/
+ * AUTHOR: Benjamin Poile
+ * DESCRIPTION: writes a weekly plan to a file. This function must call
+ * storeDailyPlan();.You must apply the overloaded stream insertion operator here!
+ * Note: you must determine the appropriate parameters and return type. Once again you
+ * must define two of these!
+ */
 void storeWeeklyPlan(DietPlan weeklyPlan[]) {
 	fstream diet_outfile;
 	diet_outfile.open("dietPlans.txt");
+
 	for (int i = 0; i < 7; i++)
 		storeDailyPlan(diet_outfile, weeklyPlan[i]);
+	
 	diet_outfile.close();
 }
 
 void storeWeeklyPlan(ExercisePlan weeklyPlan[]) {
 	fstream exercise_outfile;
-	exercise_outfile.open("dietPlans.txt");
+	exercise_outfile.open("exercisePlans.txt");
+
 	for (int i = 0; i < 7; i++)
 		storeDailyPlan(exercise_outfile, weeklyPlan[i]);
+	
 	exercise_outfile.close();
 }
 
 /*
-* AUTHOR: Benjamin Poile
-* DESCRIPTION: Displays nine menu options.
-*/
+ * AUTHOR: Benjamin Poile
+ * DESCRIPTION: Displays nine menu options.
+ */
 int displayMenu() {
 	int menu = -1;
 

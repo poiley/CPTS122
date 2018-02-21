@@ -16,9 +16,9 @@ public:
 
 	~DietPlan();
 
-	int getCalories();
-	string getName();
-	string getDate();
+	int getCalories() const;
+	string getName() const;
+	string getDate() const;
 
 	void setCalories(int newCalories);
 	void setName(string newName);
@@ -30,5 +30,5 @@ private:
 	string name, date;
 };
 
-
-//ifstream& operator >> (ifstream& in, DietPlan &play);
+ostream& operator << (ostream &out, const DietPlan &plan);
+istream& operator >> (istream &in, DietPlan &plan);

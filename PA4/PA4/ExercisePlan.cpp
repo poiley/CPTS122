@@ -30,15 +30,15 @@ ExercisePlan::ExercisePlan(ExercisePlan &newPlan) {
 ExercisePlan::~ExercisePlan() {}
 
 /**GETTERS**/
-int ExercisePlan::getSteps() {
+int ExercisePlan::getSteps() const {
 	return steps;
 }
 
-string ExercisePlan::getName() {
+string ExercisePlan::getName() const {
 	return name;
 }
 
-string ExercisePlan::getDate() {
+string ExercisePlan::getDate() const {
 	return date;
 }
 
@@ -64,4 +64,27 @@ void ExercisePlan::editGoal(){
 	setSteps(newSteps);
 
 	cout << "New goal: " << steps << endl;
+}
+
+/**NON MEMBER FUNCTIONS**/
+ostream& operator << (ostream &out, const ExercisePlan &plan) {
+	out << plan.getName()  << endl
+		<< plan.getSteps() << endl
+		<< plan.getDate()  << endl;
+
+	return out;
+}
+
+istream& operator >> (istream &in, ExercisePlan &plan) {
+	char data[20];
+	in >> data;
+
+	if (plan.getName() == "")
+		plan.setName(data);
+	else if (plan.getSteps() == 0)
+		plan.setSteps(stoi(data));
+	else
+		plan.setDate(data);
+
+	return in;
 }
