@@ -76,15 +76,18 @@ ostream& operator << (ostream &out, const ExercisePlan &plan) {
 }
 
 istream& operator >> (istream &in, ExercisePlan &plan) {
-	char data[20];
-	in >> data;
+	string data;
 
-	if (plan.getName() == "")
-		plan.setName(data);
-	else if (plan.getSteps() == 0)
-		plan.setSteps(stoi(data));
-	else
-		plan.setDate(data);
+	getline(in, data);
+	plan.setName(data);
+
+	getline(in, data);
+	plan.setSteps(stoi(data));
+
+	getline(in, data);
+	plan.setDate(data);
+
+	in.ignore(sizeof(char), '\n');
 
 	return in;
 }

@@ -76,15 +76,18 @@ ostream& operator << (ostream &out, const DietPlan &plan) {
 }
 
 istream& operator >> (istream &in, DietPlan &plan) {
-	char data[20];
-	in >> data;
+	string data;
 
-	if (plan.getName() == "")
-		plan.setName(data);
-	else if (plan.getCalories() == 0)
-		plan.setCalories(stoi(data));
-	else
-		plan.setDate(data);
-	
+	getline(in, data);
+	plan.setName(data);
+
+	getline(in, data);
+	plan.setCalories(stoi(data));
+
+	getline(in, data);
+	plan.setDate(data);
+
+	in.ignore(sizeof(char), '\n');
+
 	return in;
 }

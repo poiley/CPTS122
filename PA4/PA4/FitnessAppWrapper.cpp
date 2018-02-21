@@ -59,8 +59,10 @@ void runApp() {
 				exercise[day - 1].editGoal();
 				break;
 			case 9:
-				storeWeeklyPlan(diet);
-				storeWeeklyPlan(exercise);
+				if(diet[0].getName() != "")
+					storeWeeklyPlan(diet);
+				if(exercise[0].getName() != "")
+					storeWeeklyPlan(exercise);
 				diet_outfile.close();
 				exercise_outfile.close();
 				cout << "Exiting!" << endl;
@@ -77,13 +79,9 @@ void runApp() {
  */
 void loadDailyPlan(fstream &fileStream, DietPlan &plan) {
 	fileStream >> plan;
-	fileStream >> plan;
-	fileStream >> plan;
 }
 
 void loadDailyPlan(fstream &fileStream, ExercisePlan &plan) {
-	fileStream >> plan;
-	fileStream >> plan;
 	fileStream >> plan;
 }
 

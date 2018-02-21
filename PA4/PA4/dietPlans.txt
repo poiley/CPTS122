@@ -2,27 +2,27 @@ DietPlan1
 10
 01/01/2018
 
-DietPlan1
-10
+DietPlan2
+20
 01/02/2018
 
-DietPlan1
-10
+DietPlan3
+30
 01/03/2018
 
-DietPlan1
-10
+DietPlan4
+40
 01/04/2018
 
-DietPlan1
-10
+DietPlan5
+50
 01/05/2018
 
-DietPlan1
-10
+DietPlan6
+60
 01/06/2018
 
-DietPlan1
-10
+DietPlan7
+70
 01/07/2018
 
