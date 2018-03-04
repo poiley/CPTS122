@@ -13,9 +13,9 @@ int main(void) {
 }
 
 /*
-* AUTHOR: Benjamin Poile
-* DESCRIPTION: Starts the main application.
-*/
+ * AUTHOR: Benjamin Poile
+ * DESCRIPTION: Starts the main application.
+ */
 void runApp() {
 	cout << "Running App..." << endl << endl;
 

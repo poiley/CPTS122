@@ -50,6 +50,7 @@ void ExercisePlan::setSteps(int newSteps) {
 void ExercisePlan::setName(string newName) {
 	name = newName;
 }
+
 void ExercisePlan::setDate(string newDate) {
 	date = newDate;
 }
