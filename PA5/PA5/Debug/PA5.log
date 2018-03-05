@@ -1,0 +1,6 @@
+﻿  Main.cpp
+c:\users\benjamin poile\documents\visual studio 2015\projects\pa5\pa5\main.cpp(13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\benjamin poile\documents\visual studio 2015\projects\pa5\pa5\main.cpp(29): warning C4101: 'normal': unreferenced local variable
+c:\users\benjamin poile\documents\visual studio 2015\projects\pa5\pa5\main.cpp(24): warning C4101: 'express': unreferenced local variable
+  PA5.vcxproj -> C:\Users\Benjamin Poile\Documents\Visual Studio 2015\Projects\PA5\Debug\PA5.exe
+  PA5.vcxproj -> C:\Users\Benjamin Poile\Documents\Visual Studio 2015\Projects\PA5\Debug\PA5.pdb (Full PDB)
