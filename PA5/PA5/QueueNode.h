@@ -1,10 +1,20 @@
+/*********************************************************************
+* Programmer: Benjamin Poile
+* Class : CptS 122, Spring 2018
+* Programming Assignment : PA 5
+* Date : Mar 1st, 2018
+* Credits : Andrew O'Fallon for instructions and guidance with Queue
+*			code
+**********************************************************************/
+
 #include "Resources.h"
 #include "Data.h"
 
 class QueueNode {
 	public: // Member Functions
 		QueueNode();
-		QueueNode(Data *newData);
+		QueueNode(const Data &newData);
+		QueueNode(const QueueNode &copy);
 		void setNextPtr(QueueNode *pMem);
 		void setData(Data *newData);
 

@@ -145,10 +145,18 @@
     <None Include="classList.csv" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Functions.cpp" />
+    <ClCompile Include="List.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Stack.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Functions.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="Resources.h" />
+    <ClInclude Include="Stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

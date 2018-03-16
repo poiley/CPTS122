@@ -3,7 +3,8 @@
 * Class : CptS 122, Spring 2018
 * Programming Assignment : PA 5
 * Date : Mar 1st, 2018
-* Credits : Andrew O'Fallon for instructions
+* Credits : Andrew O'Fallon for instructions and guidance with Queue
+*			code
 **********************************************************************/
 
 #include "Resources.h"
@@ -21,12 +22,12 @@ int main(void) {
 	/*Queue `express` represents the express lane
 	  Customers arrive every one to five minutes
 	  Service times range from one to five minutes*/
-	Queue *express;
+	Queue express;
 	
 	/*Queue `normal` represents the normale lane
 	  Customers arrive every three to eight minutes
 	  Service times range from three to eight minutes*/
-	Queue *normal;
+	Queue normal;
 	
 	// ARRIVAL TIME - GENERATE RANDOM NUMBER BETWEEN 1 - 5 / 3 - 8
 	int expressArrivalTime = ( rand() % 5 ) + 1, normalArrivalTime = ( rand() % 5 ) + 4;
@@ -38,7 +39,7 @@ int main(void) {
 	int timeElapsed = 0;
 
 	// Create initial data for express and normal lines
-	Data *expressData = new Data(1, (rand() % 5 ) + 1, 0);
+	Data *expressData = new Data(1, (rand() % 5) + 1, 0);
 	Data *normalData = new Data(1, (rand() % 5) + 4, 0);
 	
 	// Start sum of serviceTimes of customers in line
@@ -48,32 +49,44 @@ int main(void) {
 	for (timeElapsed; timeElapsed < minutesToRun; timeElapsed++) {
 		// At arrival time, generate service time for each customer.
 		if (timeElapsed == expressArrivalTime || (timeElapsed == expressData->getTotalTime() && timeElapsed != 0)) {
-			//express->enqueue(*expressData);
-			cout << "Ex:\tCustomer " << expressData->getCustomerNumber() << " has queued. " << endl;
-			cout << "\tCurrent Time: " << timeElapsed << endl;
-			cout << "\tService Time: " << expressData->getServiceTime() << endl;
-			cout << "\tElapsed Time: " << expressData->getTotalTime() << endl << endl;
+			express.enqueue(*expressData);
+			// When a new customer comes, display the appropriate messages.
+			cout << "[" << timeElapsed << "]\tEXPRESS \tCustomer " << expressData->getCustomerNumber() << " has queued. " << endl;
 		}
-
-		if (timeElapsed == expressData->getTotalTime()) {
-			//Data deq = express->dequeue();
-			cout << "Customer " << expressData->getCustomerNumber() << " has checked out." << endl;
-			expressData = new Data(expressData->getCustomerNumber() + 1, (rand() % 5) + 1, timeElapsed);
+		
+		// At arrival time, generate service time for each customer.
+		if (timeElapsed == normalArrivalTime || (timeElapsed == normalData->getTotalTime() && timeElapsed != 0)) {
+			normal.enqueue(*normalData);
+			// When a new customer comes, display the appropriate messages.
+			cout << "[" << timeElapsed << "]\tNORMAL  \tCustomer " << normalData->getCustomerNumber() << " has queued. " << endl;
 		}
 
 		// Process Customer based on service time.
-
-		// Randomly generate the arrival time of the next customer in each line.
-		// Update elapsed time to add one minute
-		// If a new customer comes, display the appropriate messages.
+		if (timeElapsed == expressData->getTotalTime()) {
+			Data dequeue = express.dequeue();
+			cout << "[" << timeElapsed << "]\tEXPRESS \tCustomer " << dequeue.getCustomerNumber() << " has dequeued." << endl;
+			// Randomly generate the arrival time of the next customer in each line.
+			expressData = new Data(expressData->getCustomerNumber() + 1, (rand() % 5) + 1, timeElapsed);
+		}
+		
+		// Process Customer based on service time.
+		if (timeElapsed == normalData->getTotalTime()) {
+			Data dequeue = normal.dequeue();
+			cout << "[" << timeElapsed << "]\tNORMAL  \tCustomer " << dequeue.getCustomerNumber() << " has dequeued." << endl;
+			// Randomly generate the arrival time of the next customer in each line.
+			normalData = new Data(normalData->getCustomerNumber() + 1, (rand() % 5) + 1, timeElapsed);
+		}
 
 		// Every 10 minutes, print out entire queue for each lines
 		if (timeElapsed % 10 == 0 && timeElapsed != 0) {
-			cout << "\nEXPRESS QUEUE:" << endl;
-			//express->printQueue();
-			cout << "\nNORMAL QUEUE:" << endl;
-			//normal->printQueue();
+			cout << "\nTime Elapsed: " << timeElapsed << "\n===EXPRESS===" << endl;
+			express.printQueue();
+
+			cout << "\n===NORMAL ===" << endl;
+			normal.printQueue();
 		}
 
+		// Update elapsed time to add one minute
 	} // Repeat for `minutesToRun` minutes.
+	express.~Queue();
 }

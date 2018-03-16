@@ -1,16 +1,26 @@
+/*********************************************************************
+* Programmer: Benjamin Poile
+* Class : CptS 122, Spring 2018
+* Programming Assignment : PA 5
+* Date : Mar 1st, 2018
+* Credits : Andrew O'Fallon for instructions and guidance with Queue
+*			code
+**********************************************************************/
+
 #include "Resources.h"
 
 class Data {
 
 public: // Member functions
 	Data();
-	const Data(int customer, int service, int elapsedTime);
-	const Data(int customer, int service);
+	Data(const Data &copy);
+	Data(int customer, int service, int elapsedTime);
+	Data(int customer, int service);
 	~Data();
 
-	int getCustomerNumber();
-	int getServiceTime();
-	int getTotalTime();
+	int getCustomerNumber() const;
+	int getServiceTime() const;
+	int getTotalTime() const;
 
 	void setCustomerNumber(int n);
 	void setServiceTime(int n);

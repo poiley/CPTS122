@@ -1,3 +1,11 @@
-001,011565739,Poile,Benjamin,benjpoile@gmail.com,4,Computer Science,freshman
-002,011565740,Smith,John,johnjsmith@gmail.com,4,Electrical Engineering,freshman
-003,011565741,Glover,Donald,gambino@iamdonald.com,4,English Literature,Sophomore
+,ID,Name,Email,Units,Program,Level
+1,1111,"Smith,John",smithj@cpts122.edu,4,CS,Freshman
+2,8147,"Beck,Sara",sara@cpts122.edu,4,EE,Junior
+3,1121,"Leinart,Timothy",tim@cpts122.edu,4,EE,Junior
+4,4478,"Art,Bruce",bart@cpts122.edu,AU,CPTE,Freshman
+5,2121,"James,Hannah",jameshannah@cpts122.edu,4,CS,Freshman
+6,5530,"Payton,Ella",epayton@cpts122.edu,4,CPTE,Graduate
+7,7759,"Sam,Theo",samt@cpts122.edu,4,EE,Sophomore
+8,1122,"Smith,Jane",jane@cpts122.edu,4,CS,Sophomore
+9,1222,"Willis,Bruce",brucewillis@cpts122.edu,AU,CS,Sophomore
+10,3255,"Mort,Kris",mort@cpts122.edu,4,CS,Senior
