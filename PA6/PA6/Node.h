@@ -1,14 +1,21 @@
+/*****************************************************************************
+ * Programmer: Benjamin Poile
+ * Class : CptS 122, Spring 2018
+ * Programming Assignment : PA 6
+ * Date : Mar 20th, 2018
+ * Credits : Andrew O'Fallon for instructions, Stack Overflow for date entries
+ ******************************************************************************/
+
+/**IMPORTS**/
 #include "Resources.h"
 
 class Node {
 	public:
+		/**CONSTRUCTORS/DESTRUCTOR**/
 		Node();
 		Node(Data newData);
 		Node(const Node &copy);
-		~Node() {};
-
-		// For Testing Purposes Only
-		void printData();
+		~Node() { delete this->pNext; };
 
 		/**GETTERS**/
 		int getAbsences() const;
@@ -19,9 +26,9 @@ class Node {
 		string getEmail() const;
 		string getMajor() const;
 		string getLevel() const;
+		string getRecentAbsence();
 		data getData() const;
 		Node *getNext() const;
-		string getRecentAbsence();
 		Stack getAbsencesList() const;
 
 		/**SETTERS**/
@@ -38,6 +45,7 @@ class Node {
 		void setAbsencesDate();
 
 	private:
+		/**PRIVATE DATA**/
 		Data studentData;
 		Node *pNext = (Node *)malloc(sizeof(Node));
 };

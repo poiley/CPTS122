@@ -1,7 +1,20 @@
+/*****************************************************************************
+ * Programmer: Benjamin Poile
+ * Class : CptS 122, Spring 2018
+ * Programming Assignment : PA 6
+ * Date : Mar 20th, 2018
+ * Credits : Andrew O'Fallon for instructions, Stack Overflow for date entries
+ ******************************************************************************/
+
+/**IMPORTS**/
 #include "List.h"
 
-List::List() {
-	pHead = (Node *)malloc(sizeof(Node));
+/**CONSTRUCTOR**/
+List::List() { pHead = (Node *)malloc(sizeof(Node)); }
+
+/**DESTRUCTOR**/
+List::~List() {
+	delete pHead;
 }
 
 /**GETTERS**/

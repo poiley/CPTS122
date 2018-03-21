@@ -1,9 +1,24 @@
+/*****************************************************************************
+ * Programmer: Benjamin Poile
+ * Class : CptS 122, Spring 2018
+ * Programming Assignment : PA 6
+ * Date : Mar 20th, 2018
+ * Credits : Andrew O'Fallon for instructions, Stack Overflow for date entries
+ ******************************************************************************/
+
+/**IMPORTS**/
 #include "Menu.h"
 
-Menu::Menu() {
-	menu_choice = -1;
-}
+/**CONSTRUCTOR**/
+Menu::Menu() { menu_choice = -1; }
 
+/**GETTERS**/
+int Menu::get_menu() { return menu_choice; }
+
+/**SETTERS**/
+void Menu::set_menu(int newMenu) { menu_choice = newMenu; }
+
+/**MISC.**/
 void Menu::display() {
 	cout << "1.)\tImport course list" << endl
 		 << "2.)\tLoad master list" << endl
@@ -17,6 +32,7 @@ void Menu::display() {
 bool Menu::execute(List **pList) {
 	List *tempList = *pList;
 	int menu;
+
 	switch (menu_choice) {
 		case 1:
 			readCSVToList(&tempList);
@@ -35,8 +51,8 @@ bool Menu::execute(List **pList) {
 			break;
 		case 6:
 			cout << "1.)\tGenerate report for all students" << endl
-				 << "2.)\tGenerate report for students with certain number of absences" << endl
-			 	 << "-> ";
+				<< "2.)\tGenerate report for students with certain number of absences" << endl
+				<< "-> ";
 			cin >> menu;
 
 			switch (menu) {
@@ -50,7 +66,7 @@ bool Menu::execute(List **pList) {
 					break;
 			}
 			break;
-		default: 
+		default:
 			cout << "Invalid input" << endl;
 		case 7:
 			cout << endl << "Exiting..." << endl;
@@ -61,14 +77,7 @@ bool Menu::execute(List **pList) {
 	return true;
 }
 
-int Menu::get_menu() {
-	return menu_choice;
-}
-
-void Menu::set_menu(int newMenu) {
-	menu_choice = newMenu;
-}
-
+/**NON-MEMBER FUNCTIONS**/
 istream& operator >> (istream &in, Menu &menu) {
 	int newMenu;
 	
