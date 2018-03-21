@@ -34,6 +34,7 @@ class Node {
 		void setMajor(string newData);
 		void setLevel(string newData);
 		void setNext(Node * const newData);
+		void setAbsencesStack(Stack newData);
 		void setAbsencesDate();
 
 	private:

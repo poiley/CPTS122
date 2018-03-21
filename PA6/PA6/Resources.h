@@ -15,15 +15,19 @@
 
 #include "Stack.h"
 
-using std::ifstream;
 using std::getline;
+using std::ifstream;
+using std::ofstream;
 using std::istringstream;
 using std::stringstream;
-
 using std::string;
+using std::to_string;
 using std::cout;
 using std::cin;
 using std::endl;
+
+using std::istream;
+
 
 typedef struct data {
 	int absences;

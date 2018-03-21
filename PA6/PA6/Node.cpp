@@ -87,6 +87,8 @@ void Node::setLevel(string newData) { studentData.level = newData; }
 
 void Node::setNext(Node * const newData) { pNext = newData; }
 
+void Node::setAbsencesStack(Stack newData) { studentData.dateOfAbsences = newData; }
+
 // CREDIT ANON STACK OVERFLOW USER - https://stackoverflow.com/questions/997946
 void Node::setAbsencesDate() { 
 	stringstream date;
