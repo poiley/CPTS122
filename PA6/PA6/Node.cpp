@@ -1,5 +1,15 @@
+/*****************************************************************************
+ * Programmer: Benjamin Poile
+ * Class : CptS 122, Spring 2018
+ * Programming Assignment : PA 6
+ * Date : Mar 20th, 2018
+ * Credits : Andrew O'Fallon for instructions, Stack Overflow for date entries
+ ******************************************************************************/
+
+/**IMPORTS**/
 #include "Node.h"
 
+/**CONSTRUCTORS**/
 Node::Node() {
 	studentData.absences = studentData.recordNumber = studentData.IDNumber = studentData.units = NULL;
 	studentData.name = studentData.email = studentData.major = studentData.level = "";
@@ -30,17 +40,6 @@ Node::Node(const Node &copy) {
 	this->studentData.level			= copy.getLevel();
 	this->studentData.dateOfAbsences= copy.getAbsencesList();
 	this->pNext						= copy.getNext();
-}
-
-// For Testing Purposes Only
-void Node::printData() {
-	cout << studentData.recordNumber << endl
-		 << studentData.IDNumber	 << endl
-		 << studentData.name		 << endl
-		 << studentData.email		 << endl
-		 << studentData.units		 << endl
-		 << studentData.major		 << endl
-		 << studentData.level		 << endl;
 }
 
 /**GETTERS**/
@@ -99,7 +98,6 @@ void Node::setAbsencesDate() {
 		 << (now->tm_mon + 1) << '-'
 		 << now->tm_mday;
 	
-	studentData.dateOfAbsences.push(date.str());
-
-	setAbsences(getAbsences() + 1);
+	studentData.dateOfAbsences.push(date.str()); // Add date to Stack
+	setAbsences(getAbsences() + 1); // Add one to absence list
 }

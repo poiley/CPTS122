@@ -1,12 +1,21 @@
+/*****************************************************************************
+ * Programmer: Benjamin Poile
+ * Class : CptS 122, Spring 2018
+ * Programming Assignment : PA 6
+ * Date : Mar 20th, 2018
+ * Credits : Andrew O'Fallon for instructions, Stack Overflow for date entries
+ ******************************************************************************/
+
+/**IMPORTS**/
 #include "Functions.h"
 
+/**READ FROM FILES**/
 void readCSVToList(List **pList) {
 	List *dataList = *pList;
 	Data dataTemp = { NULL };
-
-	int index = 0;
-	string line, data, temp;
 	ifstream classData("classList.csv");
+	string line, data, temp;
+	int index = 0;
 
 	while (getline(classData, line, '\n')) {
 		istringstream iss(line);
@@ -131,9 +140,32 @@ void readMasterToList(List **pList) {
 	*pList = dataList;
 }
 
+/**CHECK ATTENDANCE**/
+void attendanceCheck(List **pList) {
+	List *dataList = *pList;
+	Node *pTemp = dataList->getHead();
+
+	int menu = 0;
+	while (pTemp != NULL) {
+		cout << endl << "Is " << pTemp->getName() << " absent? \n1.) Yes\n2.) No\n-> ";
+		cin >> menu;
+
+		if (menu == 1) {
+			pTemp->setAbsencesDate();
+			cout << endl << pTemp->getName() << " marked absent." << endl;
+		}
+		
+		pTemp = pTemp->getNext();
+	}
+
+	*pList = dataList;
+}
+
+/**WRITE TO FILES**/
 void writeListToMaster(List *pList) {
+	List backup = *pList;
 	Node *pTemp = pList->getHead();
-	ofstream output("master.txt");
+	ofstream output("master.txt", ofstream::out | ofstream::trunc);
 
 	output << ",ID,Name,Email,Units,Program,Level,Absences,{AbsenceList}" << endl;
 
@@ -148,14 +180,14 @@ void writeListToMaster(List *pList) {
 
 		stringstream line;
 		line << pTemp->getRecordNumber() << ","
-			<< to_string(pTemp->getID()) << ","
-			<< formatName(pTemp->getName()) << ","
-			<< pTemp->getEmail() << ","
-			<< to_string(pTemp->getUnits()) << ","
-			<< pTemp->getMajor() << ","
-			<< pTemp->getLevel() << ","
-			<< to_string(pTemp->getAbsences()) << ","
-			<< absenceList;
+			 << to_string(pTemp->getID()) << ","
+			 << formatName(pTemp->getName()) << ","
+			 << pTemp->getEmail() << ","
+			 << to_string(pTemp->getUnits()) << ","
+			 << pTemp->getMajor() << ","
+			 << pTemp->getLevel() << ","
+			 << to_string(pTemp->getAbsences()) << ","
+			 << absenceList;
 
 		output << line.str() << endl;
 
@@ -165,34 +197,13 @@ void writeListToMaster(List *pList) {
 	output.close();
 }
 
-void attendanceCheck(List **pList) {
-	List *dataList = *pList;
-	Node *pTemp = dataList->getHead();
-
-	int menu = 0;
-	while (pTemp != NULL) {
-		cout << "Is " << pTemp->getName() << " absent? \n1.) Yes\n2.) No\n-> ";
-		cin >> menu;
-
-		if (menu == 1) {
-			pTemp->setAbsencesDate();
-			cout << endl << pTemp->getName() << " marked absent." << endl;
-		}
-
-		cout << endl;
-		
-		pTemp = pTemp->getNext();
-	}
-
-	*pList = dataList;
-}
-
-void generateReport(List *pList) {
+/**GENERATE REPORTS**/
+void generateReport(List *pList) { // For all Students
 	Node *pTemp = pList->getHead();
 	ofstream output("FullAttendanceReport.txt");
 
 	while (pTemp != NULL) {
-		if (pTemp->getAbsencesList().isEmpty())
+		if (pTemp->getAbsences() == 0)
 			output << pTemp->getName() << ",0," << endl;
 		else
 			output << pTemp->getName() << "," << pTemp->getAbsences() << "," << pTemp->getRecentAbsence() << endl;
@@ -203,13 +214,12 @@ void generateReport(List *pList) {
 	output.close();
 }
 
-void generateReport(List *pList, int attendanceThreshold) {
+void generateReport(List *pList, int attendanceThreshold) { // For all Students past a threshold
 	Node *pTemp = pList->getHead();
 	ofstream output("ThresholdAttendanceReport.txt");
 
 	while (pTemp != NULL) {
-
-		if ( pTemp->getAbsences() >= attendanceThreshold ) {
+		if (pTemp->getAbsences() >= attendanceThreshold) {
 			output << pTemp->getName() << endl;
 
 			Stack tempList = pTemp->getAbsencesList();
@@ -223,17 +233,18 @@ void generateReport(List *pList, int attendanceThreshold) {
 	output.close();
 }
 
+/**ASSIGNMENT BONUS**/
 void editAbsence(List **pList) {
 	List *dataList = *pList;
 	Node *pTemp = dataList->getHead();
 
 	string nameQuery, newDate;
 	int absenceQuery, menu, date;
-	cout << "Name to edit absence for (FIRST LAST)?" << endl << "-> ";
-	cin >> nameQuery;
-	cout << endl;
 
-	cout << nameQuery << endl;
+	cout << "Name to edit absence for (FIRST LAST)?" << endl << "-> ";
+	cin.ignore(1, '\n');
+	getline(cin, nameQuery);
+
 	nameQuery = makeLowerCase(nameQuery);
 	
 	while (pTemp != NULL) {
@@ -243,64 +254,72 @@ void editAbsence(List **pList) {
 	}
 
 	if (makeLowerCase(pTemp->getName()) != nameQuery) {
-		cout << "Name match not found for name '" << nameQuery << "'" << endl;
+		cout << "Name match not found for name '" << nameQuery << "'" << endl << endl;
 		return;
 	}
 
-	//pTemp is the entry we want to edit.
 	if (pTemp->getAbsences() == 0) {
-		cout << "Student '" << pTemp->getName() << "' has no absences to edit" << endl;
+		cout << "Student '" << pTemp->getName() << "' has no absences to edit" << endl << endl;
 		return;
 	}
 
-	Stack tempStack = pTemp->getAbsencesList();
+	Stack attendanceStack = pTemp->getAbsencesList(), tempData;
 
 	for (int i = 0; i < pTemp->getAbsences(); i++)
-		cout << i << ".) " << tempStack.pop() << endl;
+		cout << i + 1 << ".) " << attendanceStack.pop() << endl;
 
 	cout << "Which # absence would you like to edit?" << endl << "-> ";
 	cin >> absenceQuery;
-	cout << endl;
 
 	if (absenceQuery > pTemp->getAbsences() || absenceQuery < 1) {
-		cout << "Index out of bounds. Please try again." << endl;
+		cout << endl << "Index out of bounds. Please try again." << endl << endl;
 		return;
 	}
 
-	tempStack = pTemp->getAbsencesList();
-	Stack foo;
-	for (int i = 1; i <= absenceQuery; i++)
-		foo.push(tempStack.pop());
+	attendanceStack = pTemp->getAbsencesList();
 
-	cout << "(1) Edit or (2) Delete entry?" << endl << "-> ";
+	for (int i = 1; i <= absenceQuery; i++)
+		tempData.push(attendanceStack.pop());
+
+	cout << endl << "(1) Edit or (2) Delete entry?" << endl << "-> ";
 	cin >> menu;
 
 	if (menu == 1) {
 		cout << endl << "Year? ";
 		cin >> date;
-		newDate = date + "-";
+		newDate = to_string(date) + "-";
+
 		cout << endl << "Month? ";
 		cin >> date;
 		newDate = newDate + to_string(date) + "-";
+
 		cout << endl << "Day? ";
 		cin >> date;
 		newDate = newDate + to_string(date);
-		tempStack.push(newDate);
+
+		attendanceStack.push(newDate);
+	} else if (menu == 2) {
+		pTemp->setAbsences(pTemp->getAbsences() - 1);
+	} else {
+		cout << "Index out of bounds. Please try again." << endl << endl;
 	}
 
-	foo.pop();
-	while (!foo.isEmpty())
-		tempStack.push(foo.pop());
+	tempData.pop();
+	while (!tempData.isEmpty())
+		attendanceStack.push(tempData.pop());
 
-	pTemp->setAbsencesStack(tempStack);
+	pTemp->setAbsencesStack(attendanceStack);
+
+	cout << endl;
 
 	*pList = dataList;
 }
 
+/**STRING UTILS**/
 string formatName(string unformatted) {
+	istringstream stream(unformatted);
 	string str, out;
 	int a = 0;
-	istringstream stream(unformatted);
 
 	while (getline(stream, str, ' ')) {
 		if (a == 0)
@@ -311,14 +330,12 @@ string formatName(string unformatted) {
 			break;
 		a++;
 	}
-
 	return out;
 }
 
 string makeLowerCase(string unformatted) {
 	string temp = unformatted;
-	for (int i = 0; i < unformatted.length(); i++) {
+	for (int i = 0; i < unformatted.length(); i++)
 		temp[i] = tolower(temp[i]);
-	}
 	return temp;
 }

@@ -1,18 +1,35 @@
+/*****************************************************************************
+ * Programmer: Benjamin Poile
+ * Class : CptS 122, Spring 2018
+ * Programming Assignment : PA 6
+ * Date : Mar 20th, 2018
+ * Credits : Andrew O'Fallon for instructions, Stack Overflow for date entries
+ ******************************************************************************/
+
+/**IMPORTS**/
 #include "Functions.h"
 
+/**CLASSES**/
 class Menu {
-public:
-	Menu();
-	~Menu() {};
+	public:
+		/**CONSTRUCTOR/DESTRUCTOR**/
+		Menu();
+		~Menu() {};
 
-	void display();
-	bool execute(List **pList);
+		/**GETTER**/
+		int get_menu();
 
-	int  get_menu();
-	void set_menu(int newMenu);
-	
-private:
-	int menu_choice;
+		/**SETTER**/
+		void set_menu(int newMenu);
+
+		/**MISC.**/
+		void display();
+		bool execute(List **pList);
+
+	private:
+		/**PRIVATE DATA**/
+		int menu_choice;
 };
 
+/**NON-MEMBER FUNCTIONS**/
 istream& operator >> (istream &in, Menu &menu);
