@@ -1,0 +1,8 @@
+﻿  Main.cpp
+c:\users\poile\documents\visual studio 2015\projects\pa7\pa7\main.cpp(10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\poile\documents\visual studio 2015\projects\pa7\pa7\main.cpp(19): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  Functions.cpp
+  PA7.vcxproj -> C:\Users\poile\documents\visual studio 2015\Projects\PA7\Debug\PA7.exe
+  PA7.vcxproj -> C:\Users\poile\documents\visual studio 2015\Projects\PA7\Debug\PA7.pdb (Full PDB)

@@ -1,0 +1,4 @@
+﻿  main.cpp
+c:\users\poile\documents\visual studio 2015\projects\lab9\lab9\main.cpp(24): warning C4018: '<': signed/unsigned mismatch
+  Lab9.vcxproj -> C:\Users\poile\documents\visual studio 2015\Projects\Lab9\Debug\Lab9.exe
+  Lab9.vcxproj -> C:\Users\poile\documents\visual studio 2015\Projects\Lab9\Debug\Lab9.pdb (Full PDB)
