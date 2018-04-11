@@ -1,0 +1,6 @@
+﻿  Main.cpp
+c:\users\poile\documents\visual studio 2015\projects\lab11\lab11\testperson.h(3): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\poile\documents\visual studio 2015\projects\lab11\lab11\testperson.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\poile\documents\visual studio 2015\projects\lab11\lab11\person.h(3): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Lab11.vcxproj -> c:\users\poile\documents\visual studio 2015\Projects\Lab11\Debug\Lab11.exe
+  Lab11.vcxproj -> c:\users\poile\documents\visual studio 2015\Projects\Lab11\Debug\Lab11.pdb (Full PDB)

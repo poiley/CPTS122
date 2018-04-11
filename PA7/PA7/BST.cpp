@@ -90,8 +90,6 @@ void BST::insertHelper(BSTNode *&pTree, Data &newData) {
 /**GETTERS**/
 bool BST::isEmpty() { return (this->mpRoot == nullptr); }
 
-bool compareAscii(Data lhs, Data rhs) { return (int)lhs.letter < (int)rhs.letter; }
-
 void BST::print() const { printHelper(this->mpRoot, 0); }
 
 void BST::printHelper(BSTNode *pTree, int indent) const {

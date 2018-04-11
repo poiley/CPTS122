@@ -1,0 +1,14 @@
+﻿  Main.cpp
+c:\users\poile\documents\visual studio 2015\projects\pa8\pa8\transactionnode.h(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  DataAnalysis.cpp
+c:\users\poile\documents\visual studio 2015\projects\pa8\pa8\transactionnode.h(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating Code...
+  Compiling...
+  TransactionNode.cpp
+c:\users\poile\documents\visual studio 2015\projects\pa8\pa8\transactionnode.h(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Node.cpp
+  BST.cpp
+c:\users\poile\documents\visual studio 2015\projects\pa8\pa8\transactionnode.h(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating Code...
+  PA8.vcxproj -> C:\Users\poile\documents\visual studio 2015\Projects\PA8\Debug\PA8.exe
+  PA8.vcxproj -> C:\Users\poile\documents\visual studio 2015\Projects\PA8\Debug\PA8.pdb (Full PDB)
