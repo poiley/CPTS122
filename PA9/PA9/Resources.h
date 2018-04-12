@@ -3,6 +3,7 @@
 /**Imports**/
 #include <string>
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 /**Namespace Uses**/
 using std::cin;

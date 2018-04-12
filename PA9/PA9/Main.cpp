@@ -1,33 +1,31 @@
-#include <SFML/Graphics.hpp>
-#include "Square.h"
+#include "Window.h"
+#include "Scoreboard.h"
 
 int main(void) {
-	int SQUARE_X = 75, SQUARE_Y = 75;
+	int SQUARE_X = 75, SQUARE_Y = 75, BORDER_SIZE = 3;
 
-	sf::RenderWindow window(sf::VideoMode(300, 300), "2048");
-	
+	Window	   *display = new Window(300 + BORDER_SIZE, 400, "2048");
+	Scoreboard *score   = new Scoreboard(20, 325);
+	sf::Color   bgColor = sf::Color(170, 122, 57);
+
 	Square *squares[10][10];
 	for (int y = 0, i = 0; i < 4; i++, y += 75)
 		for (int x = 0, j = 0; j < 4;j++, x += 75)
 			squares[i][j] = new Square(SQUARE_X, SQUARE_Y, x, y);
 
-	while (window.isOpen()) {
+	while (display->isOpen()) {
 		sf::Event event;
-		while (window.pollEvent(event)) { // event loop
+		while (display->pollEvent(event)) { // Controls / Event loop
 			if (event.type == sf::Event::Closed)
-				window.close();
+				display->close();
 		}
 
-		window.clear(sf::Color(170, 122, 57));
+		display->clear(bgColor); // Clear screen with Background color
+		
+		display->draw(*score); // Scoreboard
+		display->draw(squares); // Squares
 
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
-				window.draw(*squares[i][j]);
-				window.draw(squares[i][j]->getLabel());
-			}
-		}
-
-		window.display();
+		display->display();
 	}
 
 	return 0;

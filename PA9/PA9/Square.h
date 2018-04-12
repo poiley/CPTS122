@@ -1,5 +1,5 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+
 #include "Resources.h"
 
 class Square : public sf::RectangleShape {
@@ -11,11 +11,14 @@ class Square : public sf::RectangleShape {
 		int getValue();
 
 		void setValue(int newValue);	
+		void update();
 		void setPosition(int x, int y);
 	private:
 		sf::Font font;
 		sf::Text label;
-		int value = 0, border = 3;
+		sf::Color bgColor = sf::Color(255, 219, 170), 
+				  borderColor = sf::Color(75, 75, 75);
+		int value, border = 3;
 		string valueStr = to_string(value);
 
 		void setLabel();
