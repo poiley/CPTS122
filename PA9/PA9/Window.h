@@ -10,7 +10,7 @@ class Window : public sf::RenderWindow {
 		void draw(sf::Drawable &d);
 		void draw(Square &sq);
 		void draw(Scoreboard &sc);
-		void draw(Square *squares[10][10]);
+		void draw(Square *squares[4][4]);
 
 		void clear(sf::Color &bg);
 

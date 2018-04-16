@@ -35,7 +35,7 @@ void Window::draw(Scoreboard &sc) {
 	sf::RenderWindow::draw(sc);
 }
 
-void Window::draw(Square *squares[10][10]) {
+void Window::draw(Square *squares[4][4]) {
 	for (int i = 0; i < 4; i++)
 		for (int j = 0; j < 4; j++)
 			this->draw(*squares[i][j]);

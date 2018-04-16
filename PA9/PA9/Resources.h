@@ -3,6 +3,8 @@
 /**Imports**/
 #include <string>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include <SFML/Graphics.hpp>
 
 /**Namespace Uses**/

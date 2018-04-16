@@ -9,6 +9,7 @@ class Square : public sf::RectangleShape {
 
 		sf::Text getLabel();
 		int getValue();
+		bool isEmpty();
 
 		void setValue(int newValue);	
 		void update();

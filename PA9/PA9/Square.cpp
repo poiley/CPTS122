@@ -1,9 +1,10 @@
 #include "Square.h"
+#include <cstdlib>
 
 Square::Square(int sizeX, int sizeY) {
 	this->font.loadFromFile("helvetica.ttf");
 	
-	this->setValue(0);
+	this->setValue(1);
 
 	this->label.setFont(this->font);
 	this->label.setCharacterSize(24);
@@ -31,6 +32,8 @@ sf::Text Square::getLabel() { return this->label; }
 
 int Square::getValue() { return this->value; }
 
+bool Square::isEmpty() { return (this->value == 1); }
+
 void Square::setValue(int newValue) {
 	this->value = newValue;
 	this->update();
@@ -38,7 +41,7 @@ void Square::setValue(int newValue) {
 
 void Square::setLabel() {
 	this->valueStr = "";
-	if (this->value != 0)
+	if (this->value != 1)
 		valueStr = to_string(this->value);
 	this->label.setString(valueStr);
 }
@@ -46,9 +49,11 @@ void Square::setLabel() {
 void Square::update() {
 	this->setLabel();
 	this->setFillColor(this->bgColor);
-	if (this->value == 0)
+	if (this->value == 1)
 		this->setFillColor(sf::Color::Transparent);
-	this->setPosition(this->getGlobalBounds().top, this->getGlobalBounds().left);
+	this->setPosition(this->getGlobalBounds().left, this->getGlobalBounds().top);
+	if (this->value == 4096)
+		exit(0);
 }
 
 void Square::setPosition(int x, int y) {
