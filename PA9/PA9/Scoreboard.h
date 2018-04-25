@@ -11,6 +11,9 @@ class Scoreboard : public sf::Text {
 		sf::RectangleShape getBackground();
 
 		void setValue(int newValue);
+		void addValue(int newValue);
+
+		void clearBackground();
 	private:
 		sf::Font font;
 		sf::Color bgColor = sf::Color(255, 219, 170),

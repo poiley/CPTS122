@@ -15,37 +15,46 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Task1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mammal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Horse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GuineaPig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Task1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Square.cpp">
+    <ClCompile Include="Mammal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Window.cpp">
+    <ClCompile Include="Dog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Scoreboard.cpp">
+    <ClCompile Include="Cat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Square.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Scoreboard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Gameplay.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="Horse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GuineaPig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

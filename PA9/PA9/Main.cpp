@@ -1,4 +1,4 @@
-#include "Header.h"
+#include "Gameplay.h"
 
 int main(void) {
 	srand(time(NULL));
@@ -20,17 +20,25 @@ int main(void) {
 			if (event.type == sf::Event::Closed)
 				display->close();
 			if (event.type == sf::Event::KeyPressed) {
-				if (event.key.code == sf::Keyboard::Left)
-					moveLeft(squares);
-				else if (event.key.code == sf::Keyboard::Up)
-					moveUp(squares);
-				else if (event.key.code == sf::Keyboard::Right)
-					moveRight(squares);
-				else if (event.key.code == sf::Keyboard::Down)
-					moveDown(squares);
-				insertRandom(squares);
-			}
-				
+				switch (event.key.code) {
+					case sf::Keyboard::Left:
+						moveLeft(squares, score);
+						insertRandom(squares);
+						break;
+					case sf::Keyboard::Up:
+						moveUp(squares, score);
+						insertRandom(squares);
+						break;
+					case sf::Keyboard::Right:
+						moveRight(squares, score);
+						insertRandom(squares);
+						break;
+					case sf::Keyboard::Down:
+						moveDown(squares, score);
+						insertRandom(squares);
+						break;
+				}
+			}		
 		}
 
 
@@ -41,8 +49,35 @@ int main(void) {
 
 		display->display();
 
-		if (boardFull(squares))
-			break;
+		if (boardFull(squares)) { // end game code
+			display->clear(bgColor);
+
+			sf::Font font;
+			sf::Text label;
+			font.loadFromFile("helvetica.ttf");
+			
+			label.setFont(font);
+			label.setCharacterSize(24);
+			label.setColor(sf::Color::Black);
+			label.setString("Game Over!");
+			label.setPosition(sf::Vector2f(15 + (label.getLocalBounds().width / 2), 130));
+
+			score->setPosition(sf::Vector2f(15 + (label.getLocalBounds().width / 2),
+				   label.getGlobalBounds().top + (label.getLocalBounds().height / 2) + 10));
+			score->setColor(sf::Color::Black);
+			score->clearBackground();
+
+			display->draw(*score);
+			display->draw(label);
+
+			display->display();
+			while (display->pollEvent(event)) { // Controls / Event loop
+				if (event.type == sf::Event::Closed)
+					display->close();
+				if (event.type == sf::Event::KeyPressed) {
+				}
+			}
+		}
 	}
 
 	return 0;
@@ -59,39 +94,41 @@ void insertRandom(Square *squares[4][4]) {
 		insertRandom(squares);
 }
 
-void moveLeft(Square *squares[4][4]) {
+void moveLeft(Square *squares[4][4], Scoreboard *score) {
 	for (int y = 0; y < 4; y++) {
 		for (int x = 0; x < 4; x++) {
 			if (!squares[y][x]->isEmpty() && x != 0) { // Is not empty, and is not far left
-				if (squares[y][x -1]->isEmpty()) { // if cell on left is empty
-					squares[y][x -1]->setValue(squares[y][x]->getValue());
+				if (squares[y][x - 1]->isEmpty()) {    // if cell on left is empty
+					squares[y][x - 1]->setValue(squares[y][x]->getValue());
 					squares[y][x]->setValue(1);
-				} else if (squares[y][x -1]->getValue() == squares[y][x]->getValue()) {
-					squares[y][x -1]->setValue(squares[y][x -1]->getValue() * 2);
+				} else if (squares[y][x - 1]->getValue() == squares[y][x]->getValue()) {
+					squares[y][x - 1]->setValue(squares[y][x - 1]->getValue() * 2);
 					squares[y][x]->setValue(1);
+					score->addValue(squares[y][x - 1]->getValue() / 2);
 				} 
 			}
 		}
 	}
 }
 
-void moveUp(Square *squares[4][4]) {
-	for (int y = 0; y < 4; y++) {
-		for (int x = 0; x < 4; x++) {
-			if (!squares[x][y]->isEmpty() && x != 0) { // Is not empty and not top
-				if (squares[x - 1][y]->isEmpty()) { 
-					squares[x - 1][y]->setValue(squares[x][y]->getValue());
-					squares[x][y]->setValue(1);
-				} else if (squares[x - 1][y]->getValue() == squares[x][y]->getValue()) {
-					squares[x - 1][y]->setValue(squares[x - 1][y]->getValue() * 2);
-					squares[x][y]->setValue(1);
+void moveUp(Square *squares[4][4], Scoreboard *score) {
+	for (int x = 0; x < 4; x++) {
+		for (int y = 0; y < 4; y++) {
+			if (!squares[y][x]->isEmpty() && y != 0) { // Is not empty and not top
+				if (squares[y - 1][x]->isEmpty()) { 
+					squares[y - 1][x]->setValue(squares[y][x]->getValue());
+					squares[y][x]->setValue(1);
+				} else if (squares[y - 1][x]->getValue() == squares[y][x]->getValue()) {
+					squares[y - 1][x]->setValue(squares[y - 1][x]->getValue() * 2);
+					squares[y][x]->setValue(1);
+					score->addValue(squares[y - 1][x]->getValue() / 2);
 				}
 			}
 		}
 	}
 }
 
-void moveRight(Square *squares[4][4]) {
+void moveRight(Square *squares[4][4], Scoreboard *score) {
 	for (int y = 0; y < 4; y++) {
 		for (int x = 0; x < 4; x++) {
 			if (!squares[y][x]->isEmpty() && x != 3) { // Is not empty, and is not far Right
@@ -101,33 +138,43 @@ void moveRight(Square *squares[4][4]) {
 				} else if (squares[y][x + 1]->getValue() == squares[y][x]->getValue()) {
 					squares[y][x + 1]->setValue(squares[y][x + 1]->getValue() * 2);
 					squares[y][x]->setValue(1);
+					score->addValue(squares[y][x + 1]->getValue() / 2);
 				}
 			}
 		}
 	}
 }
 
-void moveDown(Square *squares[4][4]) {
-	for (int y = 0; y < 4; y++) {
-		for (int x = 0; x < 4; x++) {
-			if (!squares[x][y]->isEmpty() && y != 3) { // Is not empty and not bottom
-				if (squares[x + 1][y]->isEmpty()) {
-					squares[x + 1][y]->setValue(squares[x][y]->getValue());
-					squares[x][y]->setValue(1);
-				} else if (squares[x + 1][y]->getValue() == squares[x][y]->getValue()) {
-					squares[x + 1][y]->setValue(squares[x + 1][y]->getValue() * 2);
-					squares[x][y]->setValue(1);
+void moveDown(Square *squares[4][4], Scoreboard *score) {
+	for (int x = 0; x < 4; x++) {
+		for (int y = 0; y < 4; y++) {
+			if (!squares[y][x]->isEmpty() && y != 3) { // Is not empty and not bottom
+				if (squares[y + 1][x]->isEmpty()) {
+					squares[y + 1][x]->setValue(squares[y][x]->getValue());
+					squares[y][x]->setValue(1);
+				} else if (squares[y + 1][x]->getValue() == squares[y][x]->getValue()) {
+					squares[y + 1][x]->setValue(squares[y + 1][x]->getValue() * 2);
+					squares[y][x]->setValue(1);
+					score->addValue(squares[y + 1][x]->getValue() / 2);
 				}
 			}
 		}
 	}
 }
-
 
 bool boardFull(Square *squares[4][4]) {
-	for (int y = 0; y < 4; y++)
-		for (int x = 0; x < 4; x++)
-			if (squares[x][y]->isEmpty())
+	for (int x = 0; x < 4; x++) {
+		for (int y = 0; y < 4; y++) {
+			if (squares[y][x]->isEmpty())
 				return false;
+			if (y != 0)
+				if (squares[y][x]->getValue() == squares[y - 1][x]->getValue())
+					return false;
+
+			if (x != 0)
+				if (squares[y][x]->getValue() == squares[y][x - 1]->getValue())
+					return false;
+		}
+	}
 	return true;
 }

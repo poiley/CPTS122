@@ -26,15 +26,17 @@ string Scoreboard::getLabel() { return this->getString(); }
 
 int Scoreboard::getValue() { return this->value; }
 
-sf::RectangleShape Scoreboard::getBackground() {
-	return this->background;
-}
+sf::RectangleShape Scoreboard::getBackground() { return this->background; }
 
 void Scoreboard::setValue(int newValue) {
-	this->value += newValue;
+	this->value = newValue;
 	this->update();
 }
 
+void Scoreboard::addValue(int newValue) { this->setValue(this->value + newValue); }
+
 void Scoreboard::setLabel() { this->setString("Score: " + to_string(this->value)); }
+
+void Scoreboard::clearBackground() { this->background.setFillColor(sf::Color::Transparent); }
 
 void Scoreboard::update() {	this->setLabel(); }
